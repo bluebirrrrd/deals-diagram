@@ -1,12 +1,16 @@
 <template>
   <div class="diagram">
     <h2>{{ msg }}</h2>
+    <code>
+      {{ deals | json }}
+    </code>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DealsDiagram',
+  props: ['deals'],
   data() {
     return {
       msg: 'Diagram works',

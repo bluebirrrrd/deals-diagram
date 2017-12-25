@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <DealsDiagram/>
+    <DealsDiagram :deals="deals"/>
   </div>
 </template>
 
 <script>
 import DealsDiagram from './components/DealsDiagram'
+import deals from './data/deals'
 
 export default {
   name: 'app',
   components: {
     DealsDiagram,
+  },
+  data() {
+    return {
+      deals,
+    }
   },
 }
 </script>
