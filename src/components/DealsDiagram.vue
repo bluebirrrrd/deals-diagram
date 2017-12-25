@@ -1,20 +1,32 @@
 <template>
   <div class="diagram">
-    <h2>{{ msg }}</h2>
-    <code>
-      {{ deals | json }}
-    </code>
+    <ul>
+      <Deal v-for="deal of deals" :key="deal._id" :deal="deal"/>
+    </ul>
   </div>
 </template>
 
 <script>
+import Deal from './Deal'
+
 export default {
   name: 'DealsDiagram',
   props: ['deals'],
+  components: {
+    Deal
+  },
   data() {
     return {
-      msg: 'Diagram works',
+      minDate: '',
+      maxDate: ''
     }
+  },
+  watch: {
+    // on deals list update, recalculates minDate and maxDate of the range
+    deals: function(oldDeals, newDeals) {
+      this.minDate = ''
+      this.maxDate = ''
+    },
   },
 }
 </script>
