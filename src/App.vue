@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import DealsDiagram from './components/DealsDiagram';
+import DealsDiagram from './components/DealsDiagram'
 
 export default {
   name: 'app',
   components: {
     DealsDiagram,
   },
-};
+}
 </script>
 
 <style>

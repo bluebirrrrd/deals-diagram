@@ -10,9 +10,9 @@ export default {
   data() {
     return {
       msg: 'Diagram works',
-    };
+    }
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
