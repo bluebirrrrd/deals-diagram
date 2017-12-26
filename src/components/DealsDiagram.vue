@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon'
 import Deal from './Deal'
 
 export default {
@@ -18,19 +19,51 @@ export default {
     },
   },
   components: {
-    Deal
+    Deal,
   },
   data() {
     return {
       minDate: '',
-      maxDate: ''
+      maxDate: '',
     }
   },
   watch: {
-    // on deals list update, recalculates minDate and maxDate of the range
-    deals: function(oldDeals, newDeals) {
+    deals: function deals() {
+      this.calculateEdgeDates()
+    },
+  },
+  mounted() {
+    this.calculateEdgeDates()
+  },
+  methods: {
+    calculateEdgeDates() {
       this.minDate = ''
       this.maxDate = ''
+      const startDates = []
+      const endDates = []
+      const dealsWithDates = []
+
+      if (!this.deals.length) return
+
+      for (const deal of this.deals) {
+        deal.startDate = DateTime.fromISO(deal.startDate)
+        deal.endDate = DateTime.fromISO(deal.endDate)
+
+        if (deal.endDateActual) {
+          deal.endDateActual = DateTime.fromISO(deal.endDateActual)
+        }
+        if (deal.closingDate) {
+          deal.closingDate = DateTime.fromISO(deal.closingDate)
+        }
+
+        startDates.push(deal.startDate)
+        endDates.push(deal.endDate)
+
+        dealsWithDates.push(deal)
+      }
+
+      this.minDate = DateTime.min(...startDates)
+      this.maxDate = DateTime.max(...endDates)
     },
   },
 }
