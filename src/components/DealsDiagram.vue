@@ -11,7 +11,12 @@ import Deal from './Deal'
 
 export default {
   name: 'DealsDiagram',
-  props: ['deals'],
+  props: {
+    deals: {
+      default: [],
+      type: Array,
+    },
+  },
   components: {
     Deal
   },
