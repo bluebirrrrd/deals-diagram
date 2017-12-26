@@ -1,7 +1,7 @@
 <template>
   <div class="diagram">
     <ul>
-      <Deal v-for="deal of deals" :key="deal._id" :deal="deal"/>
+      <Deal v-for="deal of deals" :key="deal._id" :deal="deal" :minDate="minDate" :maxDate="maxDate"/>
     </ul>
   </div>
 </template>
