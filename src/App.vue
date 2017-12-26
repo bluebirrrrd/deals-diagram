@@ -15,8 +15,13 @@ export default {
   },
   data() {
     return {
-      deals,
+      deals: [],
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.deals = deals
+    }, 500)
   },
 }
 </script>
