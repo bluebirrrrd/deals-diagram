@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Deals chart",
   "author": "Anna Kurylo <anna.kurilo21@gmail.com>",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -13,8 +15,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "luxon": "^0.2.10",
-    "vue": "^2.5.2"
+    "luxon": "^0.2.10"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -67,6 +68,7 @@
     "sinon-chai": "^2.8.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue": "^2.5.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
