@@ -41,7 +41,6 @@ export default {
       this.maxDate = ''
       const startDates = []
       const endDates = []
-      const dealsWithDates = []
 
       if (!this.deals.length) return
 
@@ -58,8 +57,6 @@ export default {
 
         startDates.push(deal.startDate)
         endDates.push(deal.endDate)
-
-        dealsWithDates.push(deal)
       }
 
       this.minDate = DateTime.min(...startDates)
