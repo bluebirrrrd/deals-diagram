@@ -1,13 +1,13 @@
 <template>
   <div class="diagram">
-    <ul>
-      <Deal v-for="deal of deals" :key="deal._id" :deal="deal" :minDate="minDate" :maxDate="maxDate"/>
+    <ul v-if="deals">
+      <Deal v-for="deal of deals" :key="deal._id" :deal="deal" :minDate="minDate" :maxDate="maxDate" :duration="duration"/>
     </ul>
   </div>
 </template>
 
 <script>
-import { DateTime } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 import Deal from './Deal'
 
 export default {
@@ -23,27 +23,23 @@ export default {
   },
   data() {
     return {
-      minDate: '',
-      maxDate: '',
+      minDate: DateTime.local(),
+      maxDate: DateTime.local(),
+      duration: Duration.fromObject({ days: 1 }),
     }
   },
   watch: {
     deals: function deals() {
+      this.transformDealsDates()
       this.calculateEdgeDates()
     },
   },
   mounted() {
+    this.transformDealsDates()
     this.calculateEdgeDates()
   },
   methods: {
-    calculateEdgeDates() {
-      this.minDate = ''
-      this.maxDate = ''
-      const startDates = []
-      const endDates = []
-
-      if (!this.deals.length) return
-
+    transformDealsDates() {
       for (const deal of this.deals) {
         deal.startDate = DateTime.fromISO(deal.startDate)
         deal.endDate = DateTime.fromISO(deal.endDate)
@@ -51,16 +47,26 @@ export default {
         if (deal.endDateActual) {
           deal.endDateActual = DateTime.fromISO(deal.endDateActual)
         }
+
         if (deal.closingDate) {
           deal.closingDate = DateTime.fromISO(deal.closingDate)
         }
+      }
+    },
+    calculateEdgeDates() {
+      const startDates = []
+      const endDates = []
 
+      if (!this.deals.length) return
+
+      for (const deal of this.deals) {
         startDates.push(deal.startDate)
         endDates.push(deal.endDate)
       }
 
       this.minDate = DateTime.min(...startDates)
       this.maxDate = DateTime.max(...endDates)
+      this.duration = this.maxDate.diff(this.minDate)
     },
   },
 }

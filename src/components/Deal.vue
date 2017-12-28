@@ -1,39 +1,51 @@
 <template>
 <li class="deal">
   <div class="deal-data">
-    <span>{{ deal.name }}</span>
-    <span class="right">
-      {{ deal.status }} <br/>
+    <span class="deal-name">{{ deal.name }}</span>
+    <div class="right deal-status">
+      {{ deal.status }}<br>
       {{ currentStatus }}
-    </span>
+    </div>
   <span class="clear"></span>
   </div>
   <div class="progress-container">
     <div class="timeline"></div>
-    <div class="deal-progress" :style="progressStyles"></div>
+    <div class="deal-progress" :style="progressStyles"></div> <!-- TODO: add title that shows the dates on hover -->
   </div>
 </li>
 </template>
 
 <script>
+import { DateTime, Duration } from 'luxon'
+
 export default {
   name: 'Deal',
-  props: ['deal', 'minDate', 'maxDate'],
+  props: {
+    deal: {
+      default: {},
+    },
+    minDate: {
+      default: DateTime.local(),
+    },
+    maxDate: {
+      default: DateTime.local(),
+    },
+    duration: {
+      default: Duration.fromObject({ days: 1 }),
+    },
+  },
   computed: {
     // compute the status depending on finish dates
     currentStatus: function currentStatus() {
       return 'Просрочено на 20 дней'
     },
-    lineDuration: function lineDuration() {
-      return this.maxDate.diff(this.minDate)
-    },
     emptyBeforeWidth: function emptyBeforeWidth() {
       return this.calculateWidthPercentageFromDates(this.minDate,
-      this.deal.startDate, this.lineDuration)
+      this.deal.startDate, this.duration)
     },
     progressWidth: function progressWidth() {
       return this.calculateWidthPercentageFromDates(this.deal.startDate,
-        this.deal.endDate, this.lineDuration)
+        this.deal.endDate, this.duration)
     },
     progressStyles: function progressStyles() {
       return {
@@ -99,7 +111,7 @@ export default {
 }
 
 .deal-data {
+  padding: 10px;
   margin-bottom: 20px;
 }
-
 </style>
