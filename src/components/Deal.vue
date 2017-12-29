@@ -37,7 +37,18 @@ export default {
   computed: {
     // compute the status depending on finish dates
     currentStatus: function currentStatus() {
-      return 'Просрочено на 20 дней'
+      const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+
+      if (this.deal.closingDate) return 'Выполнено'
+      if (this.deal.startDate > today) return 'Планируется'
+      if (this.deal.endDate > today) return 'В работе'
+      if (!this.deal.endDateActual && this.deal.endDate < today) {
+        return `Просрочено на ${this.calculateDelay(today, this.deal.endDate)} дней`
+      }
+      if (!this.deal.closingDate && this.deal.endDateActual < today) {
+        return `Акты просрочены на ${this.calculateDelay(today, this.deal.endDateActual)} дней`
+      }
+      return ''
     },
     emptyBeforeWidth: function emptyBeforeWidth() {
       return this.calculateWidthPercentageFromDates(this.minDate,
@@ -58,6 +69,11 @@ export default {
     calculateWidthPercentageFromDates(startDate, endDate, totalTime) {
       const timeFromStartDate = endDate.diff(startDate).toObject().milliseconds
       return Math.round((timeFromStartDate / totalTime.toObject().milliseconds) * 100)
+    },
+    calculateDelay(today, expectedEndDay) {
+      const result = today.diff(expectedEndDay, 'days')
+      console.log(expectedEndDay.toString(), today.toString(), result.toObject().days)
+      return result.toObject().days
     },
   },
 }
