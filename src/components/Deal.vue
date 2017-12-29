@@ -10,7 +10,7 @@
   </div>
   <div class="progress-container">
     <div class="timeline"></div>
-    <div class="deal-progress" :style="progressStyles"></div> <!-- TODO: add title that shows the dates on hover -->
+    <div class="deal-progress" :style="progressStyles" :title="deal.title"></div> <!-- TODO: add title that shows the dates on hover -->
   </div>
 </li>
 </template>
@@ -41,7 +41,7 @@ export default {
 
       if (this.deal.closingDate) return 'Выполнено'
       if (this.deal.startDate > today) return 'Планируется'
-      if (this.deal.endDate > today) return 'В работе'
+      if (this.deal.endDate >= today) return 'В работе'
       if (!this.deal.endDateActual && this.deal.endDate < today) {
         return `Просрочено на ${this.calculateDelay(today, this.deal.endDate)} дней`
       }
