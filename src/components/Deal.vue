@@ -8,9 +8,9 @@
     </div>
   <span class="clear"></span>
   </div>
-  <div class="progress-container">
+  <div class="progress-container" :title="dateString">
     <div class="timeline"></div>
-    <div class="deal-progress" :style="progressStyles" :title="deal.title"></div> <!-- TODO: add title that shows the dates on hover -->
+    <div class="deal-progress" :style="progressStyles"></div>
   </div>
 </li>
 </template>
@@ -63,6 +63,9 @@ export default {
         left: `${this.emptyBeforeWidth}%`,
         width: `${this.progressWidth}%`,
       }
+    },
+    dateString: function dateString() {
+      return `${this.deal.startDate.setLocale('en-gb').toLocaleString()}–${this.deal.endDate.setLocale('en-gb').toLocaleString()}`
     },
   },
   methods: {
