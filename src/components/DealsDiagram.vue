@@ -41,15 +41,15 @@ export default {
   methods: {
     transformDealsDates() {
       for (const deal of this.deals) {
-        deal.startDate = DateTime.fromISO(deal.startDate)
-        deal.endDate = DateTime.fromISO(deal.endDate)
+        deal.startDate = DateTime.fromISO(deal.startDate, { zone: 'utc' })
+        deal.endDate = DateTime.fromISO(deal.endDate, { zone: 'utc' })
 
         if (deal.endDateActual) {
-          deal.endDateActual = DateTime.fromISO(deal.endDateActual)
+          deal.endDateActual = DateTime.fromISO(deal.endDateActual, { zone: 'utc' })
         }
 
         if (deal.closingDate) {
-          deal.closingDate = DateTime.fromISO(deal.closingDate)
+          deal.closingDate = DateTime.fromISO(deal.closingDate, { zone: 'utc' })
         }
       }
     },

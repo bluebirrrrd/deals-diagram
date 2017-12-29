@@ -18,8 +18,8 @@ describe('DealsDiagram.vue', () => {
 
   it('should calculate correct minDate and maxDate', (done) => {
     const newDeals = deals.splice(0, 3)
-    const expectedMinDate = DateTime.fromISO(newDeals[0].startDate).toString()
-    const expectedMaxDate = DateTime.fromISO(newDeals[1].endDate).toString()
+    const expectedMinDate = DateTime.fromISO(newDeals[0].startDate, { zone: 'utc' }).toString()
+    const expectedMaxDate = DateTime.fromISO(newDeals[1].endDate, { zone: 'utc' }).toString()
 
     vm.deals = newDeals
 
