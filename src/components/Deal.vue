@@ -131,6 +131,6 @@ export default {
 
 .deal-data {
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 </style>
