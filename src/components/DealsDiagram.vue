@@ -26,20 +26,27 @@ export default {
       minDate: DateTime.local(),
       maxDate: DateTime.local(),
       duration: Duration.fromObject({ days: 1 }),
-      sortedDeals: [],
     }
+  },
+  computed: {
+    sortedDeals: function sortedDeals() {
+      return this.deals
+      .slice()
+      .sort(
+        (deal1, deal2) => deal2.priority - deal1.priority ||
+          deal1.startDate.diff(deal2.startDate).milliseconds,
+      )
+    },
   },
   watch: {
     deals: function deals() {
       this.transformDealsDates()
       this.calculateEdgeDates()
-      this.sortedDeals = this.sortDeals()
     },
   },
   mounted() {
     this.transformDealsDates()
     this.calculateEdgeDates()
-    this.sortedDeals = this.sortDeals()
   },
   methods: {
     transformDealsDates() {
@@ -70,14 +77,6 @@ export default {
       this.minDate = DateTime.min(...startDates)
       this.maxDate = DateTime.max(...endDates)
       this.duration = this.maxDate.diff(this.minDate)
-    },
-    sortDeals() {
-      return this.deals
-      .slice()
-      .sort(
-        (deal1, deal2) => deal2.priority - deal1.priority ||
-          deal1.startDate.diff(deal2.startDate).milliseconds,
-      )
     },
   },
 }
