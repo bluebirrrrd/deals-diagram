@@ -72,11 +72,12 @@ export default {
       this.duration = this.maxDate.diff(this.minDate)
     },
     sortDeals() {
-      // 1. sort by priority
-      let deals = this.deals.slice()
-      deals.sort((deal1, deal2) => deal2.priority - deal1.priority)
-      // 2. sort by start date
-      return deals
+      return this.deals
+      .slice()
+      .sort(
+        (deal1, deal2) => deal2.priority - deal1.priority ||
+          deal1.startDate.diff(deal2.startDate).milliseconds,
+      )
     },
   },
 }
