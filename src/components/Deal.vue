@@ -75,7 +75,6 @@ export default {
     },
     calculateDelay(today, expectedEndDay) {
       const result = today.diff(expectedEndDay, 'days')
-      console.log(expectedEndDay.toString(), today.toString(), result.toObject().days)
       return result.toObject().days
     },
   },
