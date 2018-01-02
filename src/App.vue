@@ -1,16 +1,27 @@
 <template>
   <div id="app">
-    <DealsDiagram/>
+    <DealsDiagram :deals="deals"/>
   </div>
 </template>
 
 <script>
 import DealsDiagram from './components/DealsDiagram'
+import deals from './data/deals'
 
 export default {
   name: 'app',
   components: {
     DealsDiagram,
+  },
+  data() {
+    return {
+      deals: [],
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.deals = deals
+    }, 500)
   },
 }
 </script>
@@ -20,7 +31,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
