@@ -21,62 +21,50 @@ export default {
   components: {
     Deal,
   },
-  data() {
-    return {
-      minDate: DateTime.local(),
-      maxDate: DateTime.local(),
-      duration: Duration.fromObject({ days: 1 }),
-    }
-  },
   computed: {
     sortedDeals: function sortedDeals() {
       return this.deals
-      .slice()
+      .map(deal => this.transformDealDates(deal))
       .sort(
         (deal1, deal2) => deal2.priority - deal1.priority ||
           deal1.startDate.diff(deal2.startDate).milliseconds,
       )
     },
-  },
-  watch: {
-    deals: function deals() {
-      this.transformDealsDates()
-      this.calculateEdgeDates()
+    minDate: function minDate() {
+      if (this.sortedDeals.length) {
+        return DateTime.min(...this.sortedDeals.map(deal => deal.startDate))
+      }
+      return DateTime.local().setZone('utc')
     },
-  },
-  mounted() {
-    this.transformDealsDates()
-    this.calculateEdgeDates()
+    maxDate: function maxDate() {
+      if (this.sortedDeals.length) {
+        return DateTime.max(...this.sortedDeals.map(deal => deal.endDate))
+      }
+      return DateTime.local().setZone('utc')
+    },
+    duration: function duration() {
+      if (this.sortedDeals.length) {
+        return this.maxDate.diff(this.minDate)
+      }
+      return Duration.fromObject({ days: 1 })
+    },
   },
   methods: {
-    transformDealsDates() {
-      for (const deal of this.deals) {
-        deal.startDate = DateTime.fromISO(deal.startDate, { zone: 'utc' })
-        deal.endDate = DateTime.fromISO(deal.endDate, { zone: 'utc' })
+    transformDealDates(deal) {
+      const newDeal = Object.assign({}, deal)
 
-        if (deal.endDateActual) {
-          deal.endDateActual = DateTime.fromISO(deal.endDateActual, { zone: 'utc' })
-        }
+      newDeal.startDate = DateTime.fromISO(newDeal.startDate, { zone: 'utc' })
+      newDeal.endDate = DateTime.fromISO(newDeal.endDate, { zone: 'utc' })
 
-        if (deal.closingDate) {
-          deal.closingDate = DateTime.fromISO(deal.closingDate, { zone: 'utc' })
-        }
-      }
-    },
-    calculateEdgeDates() {
-      const startDates = []
-      const endDates = []
-
-      if (!this.deals.length) return
-
-      for (const deal of this.deals) {
-        startDates.push(deal.startDate)
-        endDates.push(deal.endDate)
+      if (newDeal.endDateActual) {
+        newDeal.endDateActual = DateTime.fromISO(newDeal.endDateActual, { zone: 'utc' })
       }
 
-      this.minDate = DateTime.min(...startDates)
-      this.maxDate = DateTime.max(...endDates)
-      this.duration = this.maxDate.diff(this.minDate)
+      if (newDeal.closingDate) {
+        newDeal.closingDate = DateTime.fromISO(newDeal.closingDate, { zone: 'utc' })
+      }
+
+      return newDeal
     },
   },
 }
