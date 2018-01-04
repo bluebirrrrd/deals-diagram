@@ -35,7 +35,6 @@ export default {
     },
   },
   computed: {
-    // compute the status depending on finish dates
     currentStatus: function currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
