@@ -1,5 +1,6 @@
 {
   "name": "deals-diagram",
+  "version": "1.0.0",
   "description": "Deals chart",
   "author": "Anna Kurylo <anna.kurilo21@gmail.com>",
   "publishConfig": {
@@ -83,6 +84,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "version": "1.0.0"
+  ]
 }
