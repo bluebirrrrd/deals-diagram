@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import { DateTime } from 'luxon'
 
-import DealsDiagram from '@/components/DealsDiagram'
-import deals from '@/data/deals'
+import DealsDiagram from '../../../src/DealsDiagram.vue'
+import deals from '../../data/deals'
 
 describe('DealsDiagram.vue', () => {
   let Constructor
