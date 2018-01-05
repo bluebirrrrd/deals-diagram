@@ -2,10 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const baseDir = path.resolve(__dirname + '/..')
 module.exports = {
-  entry: path.resolve(__dirname + '/src/DealsDiagram.vue'),
+  entry: path.resolve(baseDir + '/src/DealsDiagram.vue'),
   output: {
-    path: path.resolve(__dirname + '/dist/'),
+    path: path.resolve(baseDir + '/dist/'),
     filename: 'vue-diagram.js',
     libraryTarget: 'umd',
 
@@ -21,7 +22,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
-        include: __dirname,
+        include: baseDir,
         exclude: /node_modules/
       },
       {
