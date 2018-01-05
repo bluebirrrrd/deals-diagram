@@ -8,6 +8,8 @@
 import DealsDiagram from '../../dist/vue-diagram'
 import deals from './data/deals'
 
+import '../../dist/styles.css'
+
 export default {
   name: 'app',
   components: {

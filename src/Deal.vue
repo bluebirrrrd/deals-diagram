@@ -2,11 +2,10 @@
 <li class="deal">
   <div class="deal-data">
     <span class="deal-name">{{ deal.name }}</span>
-    <div class="right deal-status">
+    <div class="deal-status">
       {{ deal.status }}<br>
       {{ currentStatus }}
     </div>
-  <span class="clear"></span>
   </div>
   <div class="progress-container" :title="dateString">
     <div class="timeline"></div>
@@ -69,8 +68,9 @@ export default {
   },
   methods: {
     calculateWidthPercentageFromDates(startDate, endDate, totalTime) {
-      const timeFromStartDate = endDate.diff(startDate).toObject().milliseconds
-      return Math.round((timeFromStartDate / totalTime.toObject().milliseconds) * 100)
+      const timeFromStartDate = endDate.diff(startDate).milliseconds
+      const width = Math.round((timeFromStartDate / totalTime.milliseconds) * 100)
+      return width < 1 ? 1 : width
     },
     calculateDelay(today, expectedEndDay) {
       const result = today.diff(expectedEndDay, 'days')
@@ -92,14 +92,6 @@ export default {
   border: 1px solid #bdbdbd;
   border-radius: 3px;
   box-shadow: 0px 0px 7px #bdbdbd;
-}
-
-.right {
-  float: right;
-}
-
-.clear {
-  clear: both;
 }
 
 .progress-container {
@@ -131,7 +123,21 @@ export default {
 }
 
 .deal-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
   margin-bottom: 30px;
+}
+
+.deal-name {
+  order: 1;
+  flex-grow: 5;
+}
+
+.deal-status {
+  order: 2;
+  flex-grow: 1;
+  text-align: right;
 }
 </style>

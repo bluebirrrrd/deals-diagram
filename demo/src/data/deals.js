@@ -175,7 +175,7 @@ const deals = [
     'status': 'In progress',
     'priority': null,
     'startDate': '2017-11-27T00:00:00.000Z',
-    'endDate': '2017-12-28T00:00:00.000Z',
+    'endDate': '2017-11-27T00:00:00.000Z',
     'endDateActual': null,
     'closingDate': null
   },

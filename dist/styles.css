@@ -1,5 +1,5 @@
 
-ul[data-v-06126fc5] {
+.diagram ul[data-v-06126fc5] {
   list-style-type: none;
   padding: 0;
 }
@@ -15,12 +15,6 @@ ul[data-v-06126fc5] {
   border: 1px solid #bdbdbd;
   border-radius: 3px;
   box-shadow: 0px 0px 7px #bdbdbd;
-}
-.right[data-v-5ee64be5] {
-  float: right;
-}
-.clear[data-v-5ee64be5] {
-  clear: both;
 }
 .progress-container[data-v-5ee64be5] {
   --timelineCol: var(--timelineColor, rgb(201, 201, 201));
@@ -48,6 +42,18 @@ ul[data-v-06126fc5] {
   z-index: 3;
 }
 .deal-data[data-v-5ee64be5] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
   margin-bottom: 30px;
+}
+.deal-name[data-v-5ee64be5] {
+  order: 1;
+  flex-grow: 5;
+}
+.deal-status[data-v-5ee64be5] {
+  order: 2;
+  flex-grow: 1;
+  text-align: right;
 }
