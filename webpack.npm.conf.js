@@ -30,11 +30,7 @@ module.exports = {
         options: {
           extractCSS: true
         }
-      },
-      // {
-      //   test: /\.css$/,
-      //   loader: 'style!less!css'
-      // }
+      }
     ]
   },
   plugins: [
