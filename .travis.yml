@@ -6,7 +6,8 @@ cache:
 deploy:
   provider: npm
   email: hello@bluebirrrrd.com
-  api_key: placeholder
+  api_key:
+    secure: "ZdDN21HUn4n/lVWCSXPfTQc+cSkz1kdORNgkfXBX0Bhv1RD6ObLav1epK1nOdVGDagIhpsVWHWic/nx4TkNL4xUV2SEhz81S68/Ys6gkWHcmEryfTWRwpWwb0EhP7iX7h6wuVboJ2VVkapYblmXnI9Sykss5yi2akg91nWpmoySzvx2BS63csGwr1V9F93y+Rohx8QQeH7exK5bwWrT7/o6R7BD1HMU+ZPWgfeC2ZN93jknb8n3HYYnp+8e3mr0qErjYxd0kcHPgFXA8QDHC71xibIYQek+en4tidetN8LEeIob1Mk8kROjscWQ9focVs6xQTdugmD/MqZ+LRHb3L4h5bnh9arlRCGgWCassYqaSsTS/zyWgFibgQqQUBCpZr65yuqlSdfLuXXqgKaeeVhv3daDGV+SDg2I6wzgKKyIcyBIPK7m2IASSNilTQ4m0PbolLh95659rfQQUt/l27sCI/PKLJy4mJ5Xnl2aziDsip6qIw4EGIwm+oirWul3cNfacyl41Z32KAk1oc8ubNyUliZETN7Gu3uVT8APYr9s3nQx+lKpMWdMYMMvei0HKdsYN1JBsNQgQvygpkPdTeO6Ym1xuEQFBDBeTYlfWUyYiXslrW0cXzzdY8g19Tf9DZfB9h8EUFu2pYLH76j4ozAy9Azv4dRXZnvDtE56d/yU="
   on:
     tags: true
   skip_cleanup: true

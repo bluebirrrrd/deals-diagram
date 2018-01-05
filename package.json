@@ -6,11 +6,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "dist/vue-diagram.js",
   "scripts": {
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "build:npm": "rimraf ./dist && webpack --config ./webpack.npm.conf.js"
+    "build": "rimraf ./dist && webpack --config ./webpack.npm.conf.js"
   },
   "dependencies": {
     "luxon": "^0.2.10"
