@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import DealsDiagram from './components/DealsDiagram'
+// import DealsDiagram from '../../src/DealsDiagram'
+import DealsDiagram from '../../dist/vue-diagram'
 import deals from './data/deals'
 
 export default {

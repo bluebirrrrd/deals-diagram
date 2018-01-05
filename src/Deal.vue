@@ -82,13 +82,13 @@ export default {
 
 <style scoped>
 .deal {
+  display: block;
+  width: 100%;
   --marg: var(--margin, 5px 0);
   margin: var(--marg);
   padding: 0;
   padding-top: 10px;
   box-sizing: border-box;
-  display: block;
-  width: 100%;
   border: 1px solid #bdbdbd;
   border-radius: 3px;
   box-shadow: 0px 0px 7px #bdbdbd;

@@ -8,7 +8,7 @@
 
 <script>
 import { DateTime, Duration } from 'luxon'
-import Deal from './Deal'
+import Deal from './Deal.vue'
 
 export default {
   name: 'DealsDiagram',
@@ -72,18 +72,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 ul {
   list-style-type: none;
   padding: 0;
-}
-li {
-  display: block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>
