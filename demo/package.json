@@ -1,17 +1,16 @@
 {
   "name": "deals-diagram",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Deals chart",
   "author": "Anna Kurylo <anna.kurilo21@gmail.com>",
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/vue-diagram.js",
   "scripts": {
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "build": "rimraf ./dist && webpack --config build/webpack.npm.conf.js"
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "start": "npm run dev",
+    "lint": "eslint --ext .js,.vue src",
+    "build": "node build/build.js"
   },
   "dependencies": {
     "luxon": "^0.2.10"

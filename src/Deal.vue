@@ -35,7 +35,6 @@ export default {
     },
   },
   computed: {
-    // compute the status depending on finish dates
     currentStatus: function currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
@@ -83,12 +82,13 @@ export default {
 
 <style scoped>
 .deal {
-  margin: 5px 0;
+  display: block;
+  width: 100%;
+  --marg: var(--margin, 5px 0);
+  margin: var(--marg);
   padding: 0;
   padding-top: 10px;
   box-sizing: border-box;
-  display: block;
-  width: 100%;
   border: 1px solid #bdbdbd;
   border-radius: 3px;
   box-shadow: 0px 0px 7px #bdbdbd;
@@ -103,6 +103,8 @@ export default {
 }
 
 .progress-container {
+  --timelineCol: var(--timelineColor, rgb(201, 201, 201));
+  --progressCol: var(--progressColor, green);
   width: 100%;
   padding: 0;
   margin: 0;
@@ -117,14 +119,14 @@ export default {
   left: 0;
   width: 100%;
   height: 10px;
-  background-color: rgb(201, 201, 201);
+  background-color: var(--timelineCol);
 }
 
 .deal-progress {
   position: absolute;
   bottom: 0;
   height: 10px;
-  background-color: green;
+  background-color: var(--progressCol);
   z-index: 3;
 }
 

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DealsDiagram from './components/DealsDiagram'
+import DealsDiagram from '../../dist/vue-diagram'
 import deals from './data/deals'
 
 export default {
@@ -15,13 +15,8 @@ export default {
   },
   data() {
     return {
-      deals: [],
+      deals,
     }
-  },
-  mounted() {
-    setTimeout(() => {
-      this.deals = deals
-    }, 500)
   },
 }
 </script>
@@ -32,6 +27,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
