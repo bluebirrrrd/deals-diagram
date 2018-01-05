@@ -1,0 +1,8 @@
+build/
+demo/
+test/
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+webpack.npm.conf.js
