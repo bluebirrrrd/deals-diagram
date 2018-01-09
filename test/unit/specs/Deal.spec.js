@@ -86,7 +86,7 @@ describe('Deal.vue', () => {
       })
     })
 
-    it.only('Ожидается закрытие актов', (done) => {
+    it('Ожидается закрытие актов', (done) => {
       testDeal.startDate = yesterday.minus({ days: 1 })
       testDeal.endDate = yesterday
       testDeal.endDateActual = today
