@@ -3,6 +3,10 @@
   "version": "1.0.2",
   "description": "Deals chart",
   "author": "Anna Kurylo <anna.kurilo21@gmail.com>",
+  "repository":
+    { "type" : "git",
+      "url" : "https://github.com/bluebirrrrd/deals-diagram.git"
+  },
   "publishConfig": {
     "access": "public"
   },
