@@ -1,8 +1,13 @@
+sudo: required
 language: node_js
 node_js: 8
+addons:
+  chrome: stable
 cache:
   directories:
   - node_modules
+before_deploy:
+- npm run build
 deploy:
   provider: npm
   email: hello@bluebirrrrd.com
@@ -11,4 +16,4 @@ deploy:
   on:
     tags: true
   skip_cleanup: true
-  tag: next
+  tag: latest
