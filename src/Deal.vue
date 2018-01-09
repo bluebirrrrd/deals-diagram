@@ -36,14 +36,17 @@ export default {
   computed: {
     currentStatus: function currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-
+      
       if (this.deal.closingDate) return 'Выполнено'
       if (this.deal.startDate > today) return 'Планируется'
       if (this.deal.endDate >= today) return 'В работе'
-      if (!this.deal.endDateActual && this.deal.endDate < today) {
+      if (this.deal.endDate < today && !this.deal.endDateActual) {
         return `Просрочено на ${this.calculateDelay(today, this.deal.endDate)} дней`
       }
-      if (!this.deal.closingDate && this.deal.endDateActual < today) {
+      if (+this.deal.endDateActual === +today && !this.deal.closingDate) {
+        return `Ожидается закрытие актов`
+      }
+      if (this.deal.endDateActual && !this.deal.closingDate) {
         return `Акты просрочены на ${this.calculateDelay(today, this.deal.endDateActual)} дней`
       }
       return ''

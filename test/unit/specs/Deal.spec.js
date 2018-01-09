@@ -6,8 +6,14 @@ import deals from '../../data/deals'
 
 function transformDealDates(deal) {
   const resultingDeal = Object.assign({}, deal)
-  resultingDeal.startDate = DateTime.fromISO(resultingDeal.startDate)
-  resultingDeal.endDate = DateTime.fromISO(resultingDeal.endDate)
+  resultingDeal.startDate = DateTime.fromISO(resultingDeal.startDate, { zone: 'utc' })
+  resultingDeal.endDate = DateTime.fromISO(resultingDeal.endDate, { zone: 'utc' })
+  if (resultingDeal.endDateActual) {
+    resultingDeal.endDateActual = DateTime.fromISO(resultingDeal.endDateActual, { zone: 'utc' })
+  }
+  if (resultingDeal.closingDate) {
+    resultingDeal.closingDate = DateTime.fromISO(resultingDeal.closingDate, { zone: 'utc' })
+  }
   return resultingDeal
 }
 
@@ -76,6 +82,18 @@ describe('Deal.vue', () => {
       vm.deal = testDeal
       Vue.nextTick(() => {
         expect(vm.currentStatus).to.equal('Планируется')
+        done()
+      })
+    })
+
+    it.only('Ожидается закрытие актов', (done) => {
+      testDeal.startDate = yesterday.minus({ days: 1 })
+      testDeal.endDate = yesterday
+      testDeal.endDateActual = today
+      testDeal.closingDate = null
+      vm.deal = testDeal
+      Vue.nextTick(() => {
+        expect(vm.currentStatus).to.equal('Ожидается закрытие актов')
         done()
       })
     })
