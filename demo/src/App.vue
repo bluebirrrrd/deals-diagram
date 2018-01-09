@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import DealsDiagram from '../../dist/vue-diagram'
-import deals from './data/deals'
+import 'deals-diagram/dist/styles.css'
 
-import '../../dist/styles.css'
+import DealsDiagram from 'deals-diagram'
+import deals from './data/deals'
 
 export default {
   name: 'app',
