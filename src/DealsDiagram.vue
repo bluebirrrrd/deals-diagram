@@ -30,17 +30,33 @@ export default {
           deal1.startDate.diff(deal2.startDate).milliseconds,
       )
     },
-    minDate: function minDate() {
-      if (this.sortedDeals.length) {
-        return DateTime.min(...this.sortedDeals.map(deal => deal.startDate))
+    dates: function dates() {
+      let maxDate = 0
+      let minDate = Infinity
+      
+      for (let deal of this.sortedDeals) {
+        let startDate = deal.startDate.valueOf()
+        let endDate = deal.endDate.valueOf()
+
+        if (startDate < minDate) {
+          minDate = startDate
+        }
+
+        if (endDate > maxDate) {
+          maxDate = endDate
+        }
       }
-      return DateTime.local().setZone('utc')
+
+      return {
+        minDate: DateTime.fromMillis(minDate, { zone: 'utc' }),
+        maxDate: DateTime.fromMillis(maxDate, { zone: 'utc' })
+      }
+    },
+    minDate: function minDate() {
+      return this.dates.minDate
     },
     maxDate: function maxDate() {
-      if (this.sortedDeals.length) {
-        return DateTime.max(...this.sortedDeals.map(deal => deal.endDate))
-      }
-      return DateTime.local().setZone('utc')
+      return this.dates.maxDate
     },
     duration: function duration() {
       if (this.sortedDeals.length) {
