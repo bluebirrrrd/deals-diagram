@@ -34,7 +34,7 @@ export default {
     },
   },
   computed: {
-    currentStatus: function currentStatus() {
+    currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
       if (this.deal.closingDate) return 'Finished'
@@ -46,21 +46,21 @@ export default {
 
       return ''
     },
-    emptyBeforeWidth: function emptyBeforeWidth() {
+    emptyBeforeWidth() {
       return this.calculateWidthPercentageFromDates(this.minDate,
       this.deal.startDate, this.duration)
     },
-    progressWidth: function progressWidth() {
+    progressWidth() {
       return this.calculateWidthPercentageFromDates(this.deal.startDate,
         this.deal.endDate, this.duration)
     },
-    progressStyles: function progressStyles() {
+    progressStyles() {
       return {
         left: `${this.emptyBeforeWidth}%`,
         width: `${this.progressWidth}%`,
       }
     },
-    dateString: function dateString() {
+    dateString() {
       return `${this.deal.startDate.setLocale('en-gb').toLocaleString()}–${this.deal.endDate.setLocale('en-gb').toLocaleString()}`
     },
   },
