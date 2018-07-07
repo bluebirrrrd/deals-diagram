@@ -76,10 +76,6 @@ export default {
         newDeal.endDateActual = DateTime.fromISO(newDeal.endDateActual, { zone: 'utc' })
       }
 
-      if (newDeal.closingDate) {
-        newDeal.closingDate = DateTime.fromISO(newDeal.closingDate, { zone: 'utc' })
-      }
-
       return newDeal
     },
   },

@@ -37,7 +37,7 @@ export default {
     currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
 
-      if (this.deal.closingDate) return 'Finished'
+      if (this.deal.endDateActual) return 'Finished'
       if (this.deal.startDate > today) return 'Scheduled'
       if (this.deal.endDate >= today) return 'In progress'
       if (this.deal.endDate < today && !this.deal.endDateActual) {
