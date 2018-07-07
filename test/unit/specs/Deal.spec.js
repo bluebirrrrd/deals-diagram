@@ -11,9 +11,7 @@ function transformDealDates(deal) {
   if (resultingDeal.endDateActual) {
     resultingDeal.endDateActual = DateTime.fromISO(resultingDeal.endDateActual, { zone: 'utc' })
   }
-  if (resultingDeal.closingDate) {
-    resultingDeal.closingDate = DateTime.fromISO(resultingDeal.closingDate, { zone: 'utc' })
-  }
+
   return resultingDeal
 }
 
@@ -41,73 +39,50 @@ describe('Deal.vue', () => {
   })
 
   describe('should set the status to ', () => {
-    it('Выполнено', (done) => {
+    it('Finished', (done) => {
       testDeal.endDate = yesterday
       testDeal.endDateActual = yesterday
       testDeal.closingDate = yesterday
       vm.deal = testDeal
       Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('Выполнено')
+        expect(vm.currentStatus).to.equal('Finished')
         done()
       })
     })
 
-    it('Просрочено на 1 день', (done) => {
+    it('1 days overdue', (done) => {
       testDeal.endDate = yesterday
       testDeal.endDateActual = null
       testDeal.closingDate = null
       vm.deal = testDeal
       Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('Просрочено на 1 дней')
+        expect(vm.currentStatus).to.equal('1 days overdue')
         done()
       })
     })
 
-    it('В работе', (done) => {
+    it('In progress', (done) => {
       testDeal.endDate = today
       testDeal.endDateActual = null
       testDeal.closingDate = null
       vm.deal = testDeal
       Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('В работе')
+        expect(vm.currentStatus).to.equal('In progress')
         done()
       })
     })
 
-    it('Планируется', (done) => {
+    it('Scheduled', (done) => {
       testDeal.startDate = tomorrow
       testDeal.endDate = tomorrow.plus({ days: 1 })
       testDeal.endDateActual = null
       testDeal.closingDate = null
       vm.deal = testDeal
       Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('Планируется')
+        expect(vm.currentStatus).to.equal('Scheduled')
         done()
       })
     })
 
-    it('Ожидается закрытие актов', (done) => {
-      testDeal.startDate = yesterday.minus({ days: 1 })
-      testDeal.endDate = yesterday
-      testDeal.endDateActual = today
-      testDeal.closingDate = null
-      vm.deal = testDeal
-      Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('Ожидается закрытие актов')
-        done()
-      })
-    })
-
-    it('Акты просрочены на 1 день', (done) => {
-      testDeal.startDate = yesterday.minus({ days: 1 })
-      testDeal.endDate = yesterday
-      testDeal.endDateActual = yesterday
-      testDeal.closingDate = null
-      vm.deal = testDeal
-      Vue.nextTick(() => {
-        expect(vm.currentStatus).to.equal('Акты просрочены на 1 дней')
-        done()
-      })
-    })
   })
 })
