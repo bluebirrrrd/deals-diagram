@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/bluebirrrrd/deals-diagram.svg?branch=master)](https://travis-ci.org/bluebirrrrd/deals-diagram)
 
-# deals-diagram
+# Deals diagram
 
-> Deals chart
+Vue.js component for task duration visualisation.
+
+![screenshot](/screenshot.png)
 
 ## Build Setup
 
