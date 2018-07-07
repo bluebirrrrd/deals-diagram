@@ -1,17 +1,17 @@
 <template>
-<li class="deal">
-  <div class="deal-data">
-    <span class="deal-name">{{ deal.name }}</span>
-    <div class="deal-status">
-      {{ deal.status }}<br>
-      {{ currentStatus }}
+  <li class="deal">
+    <div class="deal-data">
+      <span class="deal-name">{{ deal.name }}</span>
+      <div class="deal-status">
+        {{ deal.status }}<br>
+        {{ currentStatus }}
+      </div>
     </div>
-  </div>
-  <div class="progress-container" :title="dateString">
-    <div class="timeline"></div>
-    <div class="deal-progress" :style="progressStyles"></div>
-  </div>
-</li>
+    <div class="progress-container" :title="dateString">
+      <div class="timeline"></div>
+      <div class="deal-progress" :style="progressStyles"></div>
+    </div>
+  </li>
 </template>
 
 <script>
@@ -36,19 +36,14 @@ export default {
   computed: {
     currentStatus: function currentStatus() {
       const today = DateTime.local().setZone('utc').set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-      
-      if (this.deal.closingDate) return 'Выполнено'
-      if (this.deal.startDate > today) return 'Планируется'
-      if (this.deal.endDate >= today) return 'В работе'
+
+      if (this.deal.closingDate) return 'Finished'
+      if (this.deal.startDate > today) return 'Scheduled'
+      if (this.deal.endDate >= today) return 'In progress'
       if (this.deal.endDate < today && !this.deal.endDateActual) {
-        return `Просрочено на ${this.calculateDelay(today, this.deal.endDate)} дней`
+        return `${this.calculateDelay(today, this.deal.endDate)} days overdue`
       }
-      if (+this.deal.endDateActual === +today && !this.deal.closingDate) {
-        return `Ожидается закрытие актов`
-      }
-      if (this.deal.endDateActual && !this.deal.closingDate) {
-        return `Акты просрочены на ${this.calculateDelay(today, this.deal.endDateActual)} дней`
-      }
+
       return ''
     },
     emptyBeforeWidth: function emptyBeforeWidth() {
